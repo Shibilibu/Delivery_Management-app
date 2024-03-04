@@ -1,0 +1,24 @@
+{% extends 'Admin/AdminHomePage.html' %}
+{% block body %}
+  <link rel="stylesheet" href="static/details.css">
+<table class="table-det" border="2">
+  <tr>
+    <th scope="row">sNO</th>
+    <th>TicketName</th>
+    <th>DeliveryDate</th>
+    <th>Image Type</th>
+      <th>Image File</th>
+
+  </tr>
+    {% for i in data %}
+  <tr>
+    <td>{{ forloop.counter }}</td>
+    <td>{{ i.delivery.ticket_name }}</td>
+    <td>{{ i.delivery.delivery_date }}</td>
+      <td>{{ i.image_type }}</td>
+         <td><img src="{{ i.image_file }}" width="100" height="100"></td>
+
+  </tr>
+{% endfor %}
+</table>
+{% endblock %}

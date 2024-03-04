@@ -1,0 +1,68 @@
+
+{% extends 'User/UserHomePage.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capture Photo</title>
+    <link rel="stylesheet" href="static/capture_style.css">
+</head>
+
+<body>
+    <header>
+        <div>
+            <h1>Delivery App</h1>
+
+        </div>
+        <div class="Nav-wrapper">
+            <nav>
+                <a href="#">Home</a>
+                <a href="#">Capture</a>
+                <a href="/">Logout</a>
+            </nav>
+        </div>
+
+    </header>
+    <div class="Form-box">
+        <form action="/store_captured" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h1>Delivery Details</h1>
+            <div class="input-box">
+                <input type="text" name="tkt" required>
+                <label>Ticket Name</label>
+            </div>
+            <div class="input-box drop-down">
+                <input type="hidden" name="delivery_id" value="{{ delivery_id }}">
+                <select name="type_of_photos" style="width: 99%" required>
+                    <option value="item">Item Photo</option>
+                    <option value="invoice">Invoice Photo</option>
+                </select>
+
+            </div>
+
+            <input type="file" name="image" id="photo_input" style="display: none;" capture="user" accept="image/*"
+                required>
+
+            <div class="capture-wrapper">
+                <img src="static/capture.png" alt="capture" onclick="capturePhoto()" type="submit">
+                <button onclick="capturePhoto()" type="submit">Capture</button>
+
+            </div>
+            <div class="submit-btn">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function capturePhoto() {
+            document.getElementById('photo_input').click();
+        }
+    </script>
+</body>
+
+</html>
+{% endblock %}
